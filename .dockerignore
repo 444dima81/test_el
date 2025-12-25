@@ -1,0 +1,15 @@
+.venv
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints
+.DS_Store
+
+progit2-ru/
+data/
+scripts/
+notebook.ipynb
+
+vectorize/*.ipynb
+vectorize/__pycache__/
