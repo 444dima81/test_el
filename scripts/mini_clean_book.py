@@ -7,7 +7,7 @@ OUT = Path("pro_git_ru.cleaned.txt")
 
 text = INP.read_text(encoding="utf-8")
 
-# 1. Вырезаем код-блоки
+# Вырезаем код-блоки
 code_blocks = []
 
 def _stash_code(m):
@@ -21,13 +21,13 @@ text = re.sub(
     flags=re.DOTALL
 )
 
-# 2. Чистим обычный текст
+# Чистим обычный текст
 text = re.sub(r"(?m)^\s*\[\[[^\]]+\]\]\s*$", "", text)
 text = re.sub(r"\(\(\([^)]+\)\)\)", "", text)
 text = re.sub(r"(?m)^\s*:[\w\-]+:.*$", "", text)
 text = re.sub(r"\n{3,}", "\n\n", text).strip() + "\n"
 
-# 3. Возвращаем код-блоки
+# Возвращаем код-блоки
 for i, block in enumerate(code_blocks):
     text = text.replace(f"@@CODE_BLOCK_{i}@@", block)
 

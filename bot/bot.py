@@ -31,7 +31,7 @@ async def ask_backend(user_id: str, question: str) -> str:
     answer = data.get("answer") or "Пустой ответ."
     sources = data.get("sources") or []
     if sources:
-        # компактно покажем 1–2 источника
+        # компактно 1–2 источника
         src_lines = []
         for s in sources[:2]:
             src_lines.append(f"- {s.get('heading')} ({s.get('source_file')})")

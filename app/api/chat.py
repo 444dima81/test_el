@@ -39,7 +39,7 @@ async def chat_text(
     vectorstore = request.app.state.vectorstore
     docs = retrieve(vectorstore, question)
 
-    # 🧠 Пишем вопрос в память
+    # Пишем вопрос в память
     request.app.state.memory.append(user_id, "user", question)
 
     if not docs:
@@ -54,7 +54,7 @@ async def chat_text(
 
     context = build_context(question, docs)
 
-    # ⚙️ LLM: GigaChat
+    # GigaChat
     settings = request.app.state.settings
     history = request.app.state.memory.get(user_id)
 

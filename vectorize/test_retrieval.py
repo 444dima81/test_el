@@ -31,7 +31,7 @@ def strip_passage(text: str) -> str:
 def main():
     embeddings = HuggingFaceEmbeddings(
         model_name=HF_MODEL_NAME,
-        model_kwargs={"device": "mps"},   # MacBook M1
+        model_kwargs={"device": "mps"},   
         encode_kwargs={
             "normalize_embeddings": True,
             "batch_size": 32,

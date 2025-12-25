@@ -16,10 +16,10 @@ re_heading = re.compile(r"^(=+)\s+(.+?)\s*$")  # == Title, === Title, ==== Title
 re_image   = re.compile(r"^\s*image::.+\]\s*$")  # image::...["..."]
 
 def parse_to_documents(text: str) -> list[Document]:
-    chapter_file = None           # ch01-getting-started.asc
-    source_file = "unknown"       # book/.../section.asc
-    heading = None                # "О системе контроля версий"
-    level = None                  # 2/3/4...
+    chapter_file = None           
+    source_file = "unknown"       
+    heading = None                
+    level = None                
     buf: list[str] = []
 
     docs: list[Document] = []
@@ -47,7 +47,7 @@ def parse_to_documents(text: str) -> list[Document]:
         if m:
             flush()
             chapter_file = m.group(1)
-            source_file = chapter_file  # до первого ----- ... -----
+            source_file = chapter_file  
             heading = None
             level = None
             continue
@@ -66,14 +66,14 @@ def parse_to_documents(text: str) -> list[Document]:
         if m:
             eqs = m.group(1)
             title = m.group(2).strip()
-            # интересуют заголовки уровня >= 2 (== и глубже)
+            # интересуют заголовки уровня >= 2
             if len(eqs) >= 2:
                 flush()
                 heading = title
                 level = len(eqs)
                 continue
 
-        # Картинки выкидываем (текст вокруг остаётся)
+        # Картинки выкидываем
         if re_image.match(line):
             continue
 

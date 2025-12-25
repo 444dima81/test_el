@@ -19,7 +19,6 @@ def expand_includes(text: str, current_file: Path, seen: set[Path]) -> str:
         rel = m.group(1).strip()
         target = (current_file.parent / rel).resolve()
 
-        # include пути в репо обычно относительные к корню репозитория
         alt = (REPO_DIR / rel).resolve()
 
         if target.exists():
@@ -41,7 +40,6 @@ def expand_includes(text: str, current_file: Path, seen: set[Path]) -> str:
         out_lines.append(expand_includes(inc_text, inc_path, seen))
     return "\n".join(out_lines)
 
-# Берём “скелеты” глав, которые содержат include на реальные секции
 chapter_skeletons = sorted(REPO_DIR.glob("ch*.asc"))
 
 print(f"Репозиторий: {REPO_DIR}")

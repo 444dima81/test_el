@@ -23,7 +23,7 @@ def is_core_git(md: dict) -> bool:
 
 def heading_rank_for_rebase(heading: str | None) -> int:
     h = (heading or "").lower()
-    # чем меньше число — тем выше приоритет
+    
     if h == "перебазирование":
         return 0
     if "простейшее" in h:
@@ -56,19 +56,16 @@ def retrieve(vectorstore, query: str, k: int = 3) -> List[Document]:
 
     ql = query.lower()
     if ("rebase" in ql) or ("перебаз" in ql):
-        # 1) поднимаем кандидатов из rebasing.asc
+        
         docs.sort(key=lambda d: 0 if prefer_rebase(d.metadata) else 1)
 
-        # 2) если есть каноничная секция — оставляем только её
         reb = [d for d in docs if is_rebase_doc(d.metadata)]
         if reb:
             docs = reb
 
-        # 3) если вопрос дефиниционный — ранжируем по заголовку (хотим "Перебазирование" первым)
         if ql.startswith(("что такое", "что значит", "объясни")):
             docs.sort(key=lambda d: heading_rank_for_rebase(d.metadata.get("heading")))
 
-        # 4) для rebase обычно полезно вернуть 3 кусочка (определение + принцип + пример)
         k = max(k, 3)
 
     return docs[:k]
