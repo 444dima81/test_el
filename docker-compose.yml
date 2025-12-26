@@ -4,6 +4,21 @@ services:
     container_name: progit-ai-backend
     env_file:
       - .env
+    environment:
+      EMBEDDINGS_DEVICE: "cpu"
     ports:
       - "8000:8000"
+    restart: unless-stopped
+
+  bot:
+    build: .
+    container_name: progit-ai-bot
+    env_file:
+      - .env
+    environment:
+      BACKEND_URL: "http://backend:8000"
+      BACKEND_API_KEY: "${APP_API_KEY}"
+    command: ["python", "bot/bot.py"]
+    depends_on:
+      - backend
     restart: unless-stopped

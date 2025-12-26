@@ -8,7 +8,7 @@ def auth_guard(
     x_api_key: str = Header(..., alias="X-API-KEY"),
     x_user_id: str = Header(..., alias="X-USER-ID"),
 ) -> str:
-    if x_api_key != request.app.state.settings.API_KEY:
+    if x_api_key != request.app.state.settings.APP_API_KEY:
         raise HTTPException(status_code=401, detail="Invalid API key")
 
     user_id = (x_user_id or "").strip()

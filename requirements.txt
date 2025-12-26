@@ -13,3 +13,5 @@ sentence-transformers==5.2.0
 faiss-cpu==1.13.2
 
 openai==2.14.0
+
+aiogram>=3,<4

@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    API_KEY: str = "dev-key"
+    APP_API_KEY: str = "dev-key"
 
     FAISS_DIR: Path = Path("vectorize/store_faiss")
     HF_MODEL_NAME: str = "intfloat/multilingual-e5-large"
